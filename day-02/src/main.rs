@@ -8,6 +8,7 @@ fn main() {
 		.collect();
 
 	part1(&lines);
+	part2(&lines);
 }
 
 fn part1(lines: &Vec<String>) {
@@ -30,4 +31,27 @@ fn part1(lines: &Vec<String>) {
 	}
 
 	println!("Part One: {}", horizontal * vertical);
+}
+
+fn part2(lines: &Vec<String>) {
+	let mut horizontal = 0;
+	let mut aim = 0;
+	let mut depth = 0;
+
+	for index in 0..lines.len() {
+		let line = &lines[index].to_string();
+
+		if line.starts_with("forward ") {
+			let movement = line.replace("forward ", "").parse::<i32>().unwrap();
+			horizontal += movement;
+			depth += aim * movement;
+		} else if line.starts_with("down ") {
+			let movement = line.replace("down ", "").parse::<i32>().unwrap();
+			aim += movement;
+		} else if line.starts_with("up ") {
+			let movement = line.replace("up ", "").parse::<i32>().unwrap();
+			aim -= movement;
+		}
+	}
+	println!("Part Two: {}", horizontal * depth);
 }
