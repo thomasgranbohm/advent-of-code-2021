@@ -7,6 +7,7 @@ fn main() {
 		.collect();
 
 	part1(&fishes);
+	part2(&fishes);
 }
 
 fn calc_fishes(fishes: &Vec<i64>, days: i64) -> i64 {
@@ -33,4 +34,8 @@ fn calc_fishes(fishes: &Vec<i64>, days: i64) -> i64 {
 
 fn part1(fishes: &Vec<i64>) {
 	println!("Part One: {}", calc_fishes(&fishes, 80));
+}
+
+fn part2(fishes: &Vec<i64>) {
+	println!("Part Two: {}", calc_fishes(&fishes, 256));
 }
