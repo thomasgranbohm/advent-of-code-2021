@@ -15,7 +15,13 @@ fn main() {
 	nums.sort();
 
 	part1(&nums);
+	part2(&nums);
 }
+
+fn factorial(num: i64) -> i64 {
+	num * (num + 1) / 2
+}
+
 fn part1(nums: &Vec<i32>) {
 	let mid = nums[nums.len() / 2];
 
@@ -25,4 +31,29 @@ fn part1(nums: &Vec<i32>) {
 	}
 
 	println!("Part One: {}", total_fuel);
+}
+
+fn part2(nums: &Vec<i32>) {
+	let mut max = -1;
+	for &n in nums {
+		if max < n || max == -1 {
+			max = n
+		}
+	}
+
+	let facts: Vec<i64> = nums.iter().map(|a| factorial(*a as i64)).collect();
+	let mut lower = -1;
+	for a in 0..(max + 1) {
+		let mut total_fuel = 0;
+
+		for (i, _) in facts.iter().enumerate() {
+			total_fuel += factorial(((nums[i] - a) as i64).abs());
+		}
+
+		if total_fuel < lower || lower == -1 {
+			lower = total_fuel;
+		}
+	}
+
+	println!("Part Two: {}", lower);
 }
